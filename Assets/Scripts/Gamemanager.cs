@@ -4,6 +4,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Gamemanager : MonoBehaviour
     public List<GameObject> tubePrefabs;
     [HideInInspector]
     public int Points = 0;
+    public Text text__;
     
     private bool isGameOver= false;
 
@@ -43,9 +45,9 @@ public class Gamemanager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        text__.text = "Points : " + Points.ToString();
     }
 
     public bool IsGameActive()
