@@ -6,6 +6,7 @@ using UnityEngine;
 public class tubeMover : MonoBehaviour
 {
     public float xDestroyTube = -30f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +16,13 @@ public class tubeMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        var gameManager = Gamemanager.instance;
-        if (gameManager.IsGameOver())
+        if (Gamemanager.instance.isPaused == false)
         {
-            return;
+            var gameManager = Gamemanager.instance;
+            if (gameManager.IsGameOver())
+            {
+                return;
+            }
         }
 
         float x = Gamemanager.instance.tubeSpeed * Time.fixedDeltaTime;

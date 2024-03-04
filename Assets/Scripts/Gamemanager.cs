@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.SceneManagement;
@@ -14,6 +13,9 @@ public class Gamemanager : MonoBehaviour
     [HideInInspector]
     public int Points = 0;
     public Text text__;
+
+    public GameObject pauseMenu;
+    public bool isPaused;
     
     private bool isGameOver= false;
 
@@ -41,13 +43,17 @@ public class Gamemanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         text__.text = "Points : " + Points.ToString();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu();
+        }
     }
 
     public bool IsGameActive()
@@ -73,5 +79,22 @@ public class Gamemanager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
-    
+
+    private void PauseMenu()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            isPaused = true;
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+        }
+    }
+
+
 }
